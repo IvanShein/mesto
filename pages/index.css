@@ -1,0 +1,374 @@
+/* Vendor css */
+
+@import url(../vendor/normalize.css);
+
+
+/* Vendor fonts */
+
+@import url(../vendor/fonts/Inter_Web/inter.css);
+
+
+/* CSS - blocks */
+
+/* @import url(../blocks/page/page.css);
+@import url(../blocks/content/content.css); */
+
+
+.page {
+  background-color: #000;
+  margin: 0 auto;
+  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  color: #FFF;
+  min-width: 320px;
+  /* width: 100%; */
+  text-rendering: optimizeLegibility;
+}
+
+.content {
+ /* width: 100%; */
+}
+
+
+/* Header*/
+
+.header {
+  width: 100%;
+  min-height: calc(56px + 28px + 1px);
+  padding: 28px 0 0;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 45px 0 0;
+    min-height: 118px;
+  }
+}
+
+
+.header__logo {
+  width: 104px;
+  height: 24px;
+  padding: 0 0 0 27px;
+}
+
+@media screen and (min-width: 1024px) {
+  .header__logo {
+    width: 142px;
+    height: 33px;
+    padding: 0;
+  }
+}
+
+/* Profile- section */
+
+.profile {
+  min-width: 282px;
+  min-height: 286px;
+  margin: 0 auto;
+  padding: 33px 0 36px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 1024px) {
+  .profile {
+    padding: 34px 0 39px 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+    min-height: 120px;
+  }
+}
+
+.profile__avatar {
+  margin: 0 auto;
+  padding: 9px 0 0 0;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}
+
+@media screen and (min-width: 1024px) {
+  .profile__avatar {
+    margin: 0;
+    padding: 7px 0 7px;
+  }
+}
+
+.profile__info {
+  text-align: center;
+  display: block;
+  min-height: 54px;
+  padding: 26px 0 34px;
+}
+
+@media screen and (min-width: 1024px) {
+  .profile__info {
+    margin: 0;
+    padding: 26px 0 34px;
+  }
+}
+
+.profile__name {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding: 0 0 7px 28px;
+}
+
+
+@media screen and (min-width: 1024px) {
+  .profile__name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 243px 6px 28px;
+   }
+}
+
+.profile__title {
+  margin: 0;
+  padding: 0 11px 0 0;
+  font-size: 27px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 1024px) {
+  .profile__title {
+    margin: 0;
+    padding: 0 21px 2px 0;
+    font-size: 42px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.14;
+  }
+}
+
+.profile__edit-button {
+  margin: 0;
+  padding: 0;
+  background-color: unset;
+  background-image: url(../images/edit_button.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #FFFFFF;
+  box-sizing: border-box;
+  transition: .2s;
+}
+
+
+.profile__edit-button:hover {
+  opacity: 0.5;
+  transition: .2s;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+  .profile__edit-button {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    transition: .2s;
+  }
+}
+
+.profile__subtitle {
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 1024px) {
+  .profile__subtitle {
+    font-size: 18px;
+    text-align: left;
+    padding-left: 29px;
+    margin: 0;
+  }
+}
+
+
+.profile__add-button{
+  justify-self: end;
+  margin: 0 auto;
+  padding: 0;
+  align-self: center;
+  box-sizing: border-box;
+  background-color: unset;
+  background-image: url(../images/add_button.svg);
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: 50.5% 50%;
+  width: 282px;
+  height: 50px;
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
+  transition: .2s;
+}
+
+.profile__add-button:hover{
+  opacity: 0.6;
+  transition: .2s;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+  .profile__add-button {
+    margin: 0;
+    align-self: center;
+    background-size: 22px 22px;
+    background-position: 50% 50%;
+    width: 150px;
+  }
+  
+}
+
+
+/* Elements - section */
+
+.elements {
+  margin: 0 auto;
+  color: #000;
+}
+
+.cards {
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 282px;
+  row-gap: 20px;
+  justify-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 720px) {
+  .cards {
+    grid-template-columns: repeat(2,282px);
+    gap: 20px 17px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(3,282px);
+  }
+}
+
+.cards__item {
+  margin: 0;
+  padding: 0;
+  background-color: #FFF;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 282px;
+  max-height: 362px;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.cards__image {
+  margin: 0;
+  padding: 0;
+  width: 282px;
+  height: 282px;
+}
+
+.cards__info {
+  display: flex;
+  box-sizing: border-box;
+  padding: 22px 0 24px 21px;
+  justify-content: space-between;
+  max-width: 262px;
+}
+
+.cards__title {
+  margin: 0;
+  padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 900;
+  max-width: 200px;
+
+}
+
+.cards__like-button {
+  margin: 0;
+  padding: 0 0 0 1px;
+  width: 22px;
+  height: 19px;
+  background-image: url(../images/like_button.svg);
+  background-repeat: no-repeat;
+  background-color: unset;
+  background-position: center;
+  box-sizing: border-box;
+  align-self: center;
+  transition: .2s;
+  border: 0;
+}
+
+.cards__like-button_active {
+  background-image: url(../images/like_button_active.svg);
+}
+
+.cards__like-button:hover{
+  opacity: 0.5;
+  transition: .2s;
+  cursor: pointer;
+}
+
+/* Footer */
+
+.footer {
+  margin: 0;
+  padding: 51px 0 36px 19px;
+}
+
+@media screen and (min-width: 1024px) {
+  .footer {
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 67px 0 60px;
+  }
+}
+
+.footer__copyright {
+  margin: 0;
+  padding: 0;
+  color: #545454;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+@media screen and (min-width: 1024px) {
+  .footer__copyright {
+    font-size: 18px;
+  }
+}
