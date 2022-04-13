@@ -14,105 +14,80 @@
 
 
 <body class="page">
-      
-<!-- Header -->
-    
+
+  <!-- Header -->
+
   <header class="header">
-  <img  class="header__logo" src=./images/mesto_logo.svg alt="Место Россия - логотип">
+    <img class="header__logo" src=./images/mesto_logo.svg alt="Место Россия - логотип">
   </header>
 
-
-<!-- Main content -->
+  <!-- Main content -->
 
   <main class="content">
 
-<!-- Section Profile -->
+    <!-- Section Profile -->
 
     <section class="profile">
       <img class="profile__avatar" src="./images/profile__image.png" alt="Фотография пользователя - Аватар">
-      <div class="profile__info"> 
+      <div class="profile__info">
         <div class="profile__name">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__edit-button"></button> 
+          <button type="button" aria-label="Кнопка редактирования профиля" class="profile__edit-button"></button>
         </div>
         <p class="profile__subtitle">Исследователь океана</p>
       </div>
-      <button type="button" class="profile__add-button"></button>
+      <button type="button" aria-label="Кнопка добавления карточки" class="profile__add-button"></button>
     </section>
 
-<!-- Section Elements-->
+    <!-- Section Elements-->
 
     <section class="elements">
       <ul class="cards">
         <li class="cards__item">
-          <img
-            class="cards__image"
-            src="./images/card1.png"
-            alt="Заброшеная церковь на фоне гор"
-          >
+          <img class="cards__image" src="./images/card1.png" alt="Заброшеная церковь на фоне гор">
           <div class="cards__info">
             <h2 class="cards__title">Карачаевско-Черкесская</h2>
-            <button type="button" class="cards__like-button"></button>
+            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
           </div>
         </li>
 
         <li class="cards__item">
-          <img
-            class="cards__image"
-            src="./images/card2.png"
-            alt="Заброшеная церковь на фоне гор"
-          >
+          <img class="cards__image" src="./images/card2.png" alt="Заброшеная церковь на фоне гор">
           <div class="cards__info">
             <h2 class="cards__title">Гора Эльбрус</h2>
-            <button type="button" class="cards__like-button"></button>
-          </div>
-        </li>
-        
-        <li class="cards__item">
-          <img
-            class="cards__image"
-            src="./images/card3.png"
-            alt="Заброшеная церковь на фоне гор"
-          >
-          <div class="cards__info">
-            <h2 class="cards__title">Домбай</h2>
-            <button type="button" class="cards__like-button"></button>
+            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
           </div>
         </li>
 
         <li class="cards__item">
-          <img
-            class="cards__image"
-            src="./images/card2.png"
-            alt="Заброшеная церковь на фоне гор"
-          >
+          <img class="cards__image" src="./images/card3.png" alt="Заброшеная церковь на фоне гор">
+          <div class="cards__info">
+            <h2 class="cards__title">Домбай</h2>
+            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
+          </div>
+        </li>
+
+        <li class="cards__item">
+          <img class="cards__image" src="./images/card2.png" alt="Заброшеная церковь на фоне гор">
           <div class="cards__info">
             <h2 class="cards__title">Гора Эльбрус</h2>
-            <button type="button" class="cards__like-button"></button>
+            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
           </div>
         </li>
 
         <li class="cards__item">
-          <img
-            class="cards__image"
-            src="./images/card3.png"
-            alt="Заброшеная церковь на фоне гор"
-          >
+          <img class="cards__image" src="./images/card3.png" alt="Заброшеная церковь на фоне гор">
           <div class="cards__info">
             <h2 class="cards__title">Домбай</h2>
-            <button type="button" class="cards__like-button"></button>
+            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
           </div>
         </li>
 
         <li class="cards__item">
-          <img
-            class="cards__image"
-            src="./images/card1.png"
-            alt="Заброшеная церковь на фоне гор"
-          >
+          <img class="cards__image" src="./images/card1.png" alt="Заброшеная церковь на фоне гор">
           <div class="cards__info">
             <h2 class="cards__title">Карачаевско-Черкесская</h2>
-            <button type="button" class="cards__like-button"></button>
+            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
           </div>
         </li>
 
@@ -120,33 +95,31 @@
     </section>
   </main>
 
-<!-- Footer -->
+  <!-- Footer -->
 
   <footer class="footer">
-    
+
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
 
   </footer>
 
-<!-- Pop-Up Profile editor -->
+  <!-- Pop-Up Profile editor -->
 
   <section class="popup">
     <div class="popup__container">
-      <div class="popup__body">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="profile-editor">
-          <input class="popup__input popup__input_type_name" maxlength="40" name="name" placeholder="Имя">
-          <input class="popup__input popup__input_type_description" maxlength="40" name="about" placeholder="Вид деятельности">
-          <button type="submit" class="popup__save-button">Сохранить</button>
-        </form>
-        
-        <button type="button" class="popup__close-button"></button>
-      </div>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" name="profile-editor">
+        <input class="popup__input popup__input_type_name" name="name" placeholder="Имя">
+        <input class="popup__input popup__input_type_description" name="about" placeholder="Вид деятельности">
+        <button type="submit" class="popup__save-button">Сохранить</button>
+      </form>
+
+      <button type="button" aria-label="Кнопка закрыть окно редактирования профиля" class="popup__close-button"></button>
     </div>
   </section>
 
 
-<script src="./scripts/index.js"></script>
+  <script src="./scripts/index.js"></script>
 
 </body>
 

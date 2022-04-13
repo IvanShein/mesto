@@ -9,14 +9,10 @@
     color: #000000;
     padding: 28px 0 10px 0;
   }
-  
+
   @media screen and (min-width: 1024px) {
     .popup__input {
       max-width: 358px;
       padding: 0 0 10px 0;
-    }
-    .popup__input_type_description {
-      padding: 0 0 10px 0;
-      margin: 30px 0 0 0;
     }
   }
