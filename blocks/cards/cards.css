@@ -7,14 +7,14 @@
     justify-items: center;
     justify-content: center;
 }
-  
+
 @media screen and (min-width: 720px) {
   .cards {
     grid-template-columns: repeat(2,282px);
     gap: 20px 17px;
   }
 }
-  
+
 @media screen and (min-width: 1024px) {
   .cards {
     grid-template-columns: repeat(3,282px);

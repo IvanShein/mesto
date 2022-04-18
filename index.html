@@ -43,53 +43,6 @@
 
     <section class="elements">
       <ul class="cards">
-        <li class="cards__item">
-          <img class="cards__image" src="./images/card1.png" alt="Заброшеная церковь на фоне гор">
-          <div class="cards__info">
-            <h2 class="cards__title">Карачаевско-Черкесская</h2>
-            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
-          </div>
-        </li>
-
-        <li class="cards__item">
-          <img class="cards__image" src="./images/card2.png" alt="Заброшеная церковь на фоне гор">
-          <div class="cards__info">
-            <h2 class="cards__title">Гора Эльбрус</h2>
-            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
-          </div>
-        </li>
-
-        <li class="cards__item">
-          <img class="cards__image" src="./images/card3.png" alt="Заброшеная церковь на фоне гор">
-          <div class="cards__info">
-            <h2 class="cards__title">Домбай</h2>
-            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
-          </div>
-        </li>
-
-        <li class="cards__item">
-          <img class="cards__image" src="./images/card2.png" alt="Заброшеная церковь на фоне гор">
-          <div class="cards__info">
-            <h2 class="cards__title">Гора Эльбрус</h2>
-            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
-          </div>
-        </li>
-
-        <li class="cards__item">
-          <img class="cards__image" src="./images/card3.png" alt="Заброшеная церковь на фоне гор">
-          <div class="cards__info">
-            <h2 class="cards__title">Домбай</h2>
-            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
-          </div>
-        </li>
-
-        <li class="cards__item">
-          <img class="cards__image" src="./images/card1.png" alt="Заброшеная церковь на фоне гор">
-          <div class="cards__info">
-            <h2 class="cards__title">Карачаевско-Черкесская</h2>
-            <button type="button" aria-label="Кнопка поставить лайк - нравится" class="cards__like-button"></button>
-          </div>
-        </li>
 
       </ul>
     </section>
@@ -105,19 +58,68 @@
 
   <!-- Pop-Up Profile editor -->
 
-  <section class="popup">
+  <section class="popup popup_type_edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="profile-editor">
+      <form class="popup__form popup__form_type_edit" name="profile-editor">
         <input class="popup__input popup__input_type_name" name="name" placeholder="Имя">
         <input class="popup__input popup__input_type_description" name="about" placeholder="Вид деятельности">
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
 
-      <button type="button" aria-label="Кнопка закрыть окно редактирования профиля" class="popup__close-button"></button>
+      <button type="button" aria-label="Кнопка закрыть окно редактирования профиля" class="popup__close-button popup__close-button_type_edit"></button>
     </div>
   </section>
 
+  <!-- Pop-Up Add new card -->
+
+  <section class="popup popup_type_add">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form popup__form_type_add" name="add new card">
+        <input class="popup__input popup__input_type_place" name="place" placeholder="Место">
+        <input class="popup__input popup__input_type_foto-link" name="foto link" placeholder="Ссылка на картинку">
+        <button type="submit" class="popup__add-button">Создать</button>
+      </form>
+
+      <button type="button" aria-label="Кнопка закрыть окно редактирования профиля" class="popup__close-button popup__close-button_type_add"></button>
+    </div>
+  </section>
+
+  <!-- Pop-Up watch fullscreen foto-->
+
+  <section class="popup popup_type_foto">
+    <div class="popup__container-foto">
+      <img src="#" class="popup__foto" alt="Изображение места" >
+      <figcaption class="popup__figcaption"></figcaption>
+      <button type="button"
+        aria-label="Кнопка закрыть окно просмотра фотографии"
+        class="popup__close-button popup__close-button_type_foto">
+      </button>
+    </div>
+  </section>
+
+
+  <template id="card">
+
+    <li class="cards__item">
+      <a href="#" class = "cards__foto-button">
+        <img class="cards__image" src="" onerror="this.src='../images/no-image.png'" alt="Изображение места">
+      </a>
+      <div class="cards__info">
+        <h2 class="cards__title"></h2>
+        <button type="button"
+          aria-label="Кнопка нравится место - поставить и убрать лайк"
+          class="cards__like-button">
+        </button>
+        <button type="button"
+          aria-label="Кнопка удаления карточки"
+          class="cards__trash-button">
+        </button>
+      </div>
+    </li>
+
+  </template>
 
   <script src="./scripts/index.js"></script>
 
