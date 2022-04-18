@@ -23,6 +23,6 @@
 * Использовать миксы для внешней геометрии и позиционирования
 
 ## Ссылка на сайт:
-https://ivanshein.github.io/mesto/
+https://mesto-ivan-shein.vercel.app
 
 ---
