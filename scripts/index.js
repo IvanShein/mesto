@@ -40,6 +40,7 @@ const profileDescription = document.querySelector('.profile__subtitle');
 const popupAdd = document.querySelector('.popup_type_add');
 const buttonOpenPopupAdd = document.querySelector('.profile__add-button');
 const buttonClosePopupAdd = document.querySelector('.popup__close-button_type_add');
+const buttonAddNewCard = document.querySelector('.popup__button_type_add-card');
 const popupFoto = document.querySelector('.popup_type_foto');
 const inputPlace = document.querySelector('.popup__input_type_place');
 const inputFotoLink = document.querySelector('.popup__input_type_foto-link');
@@ -55,11 +56,6 @@ function openPopup(popupType) {
   popupType.classList.add('popup_opened');
   document.addEventListener("keydown", closeOnEscKey);
   popupType.addEventListener("mousedown", closeOnClickOverlay);
-  // Проверяем валидность полей сразу при открытии модального окна и деактивируем кнопку, если есть невалидные поля
-  // Используем функцию toggleButtonState, объявленную в validate.js
-  // const inputList = Array.from(popupType.querySelectorAll('.form__input'));
-  // const buttonElement = popupType.querySelector('.form__submit');
-  // toggleButtonState(inputList, buttonElement);
 }
 
 function closePopup(popupType) {
@@ -69,14 +65,13 @@ function closePopup(popupType) {
 }
 
 function openPopupEdit(evt) {
-  evt.preventDefault();
   inputName.value=profileName.textContent;
   inputDescription.value=profileDescription.textContent;
   openPopup(popupEdit);
 }
 
 function openPopupAdd(evt) {
-  evt.preventDefault();
+  disableButton(buttonAddNewCard);
   openPopup(popupAdd);
 }
 
@@ -97,7 +92,7 @@ function changeUser(evt) {
   profileName.textContent=inputName.value;
   profileDescription.textContent=inputDescription.value;
   closePopupEdit();
-  console.log('Данные пользователя изменены');
+  // console.log('Данные пользователя изменены');
 }
 
 // Добавление карточек - мест. При создании каждой карточки добавляется обработчик событий
@@ -162,7 +157,7 @@ function addNewCard(evt) {
   closePopupAdd();
   inputPlace.value = '';
   inputFotoLink.value = '';
-  console.log('Новая карточка добавлена');
+  // console.log('Новая карточка добавлена');
 }
 
 // Обработчики событий

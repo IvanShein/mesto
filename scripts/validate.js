@@ -63,12 +63,9 @@ function toogleButtonState(inputList, buttonElement) {
   }
 };
 
-function disableButton(formElement) {
-  const button = formElement.querySelector('.popup__button');
-  if (button) {
-    button.classList.add('popup__button_disabled');
-    button.disabled = true;
-  }
+function disableButton(button) {
+  button.classList.add('popup__button_disabled');
+  button.disabled = true;
 };
 
 function enableValidation({formSelector , ...rest}) {

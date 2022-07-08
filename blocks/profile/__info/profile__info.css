@@ -4,10 +4,11 @@
     min-height: 54px;
     padding: 26px 0 34px;
   }
-  
+
   @media screen and (min-width: 1024px) {
     .profile__info {
       margin: 0;
       padding: 26px 0 34px;
+      min-width: 610px;
     }
   }
