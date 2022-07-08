@@ -49,13 +49,23 @@ const buttonClosePopupFoto = document.querySelector('.popup__close-button_type_f
 const imagePopupFoto = document.querySelector('.popup__foto');
 const figcaptionPopupFoto = document.querySelector('.popup__figcaption');
 
+// Функции
 
 function openPopup(popupType) {
   popupType.classList.add('popup_opened');
+  document.addEventListener("keydown", closeOnEscKey);
+  popupType.addEventListener("mousedown", closeOnClickOverlay);
+  // Проверяем валидность полей сразу при открытии модального окна и деактивируем кнопку, если есть невалидные поля
+  // Используем функцию toggleButtonState, объявленную в validate.js
+  // const inputList = Array.from(popupType.querySelectorAll('.form__input'));
+  // const buttonElement = popupType.querySelector('.form__submit');
+  // toggleButtonState(inputList, buttonElement);
 }
 
 function closePopup(popupType) {
   popupType.classList.remove('popup_opened');
+  document.removeEventListener("keydown", closeOnEscKey);
+  popupType.removeEventListener("mousedown", closeOnClickOverlay);
 }
 
 function openPopupEdit(evt) {
@@ -128,6 +138,17 @@ function createCard(place = 'не задано', fotoLink = '../images/no-image.
   return newCard;
 }
 
+function closeOnClickOverlay (evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target);
+  }
+};
+
+function closeOnEscKey (evt) {
+  if (evt.key === "Escape") {
+    closePopup(document.querySelector(".popup_opened"));
+  }
+}
 
 function renderCard(place = 'не задано', fotoLink = '../images/no-image.jpg') {
   cardsContainer.prepend(createCard(place, fotoLink));
@@ -143,6 +164,8 @@ function addNewCard(evt) {
   inputFotoLink.value = '';
   console.log('Новая карточка добавлена');
 }
+
+// Обработчики событий
 
 buttonEditProfile.addEventListener('click', openPopupEdit);
 buttonClosePopupEdit.addEventListener('click', closePopupEdit);

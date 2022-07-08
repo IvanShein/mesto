@@ -1,5 +1,5 @@
 .popup__save-button {
-    margin: 45px 0 0 0;
+    margin: 15px 0 0 0;
     background-color: #000;
     border: 0;
     border-radius: 2px;
@@ -18,6 +18,14 @@
     cursor: pointer;
     transition: .2s;
   }
+
+  .popup__save-button:disabled {
+    border: 1px solid rgba(0,0,0, .2);
+    color: rgba(0,0,0, .2);
+    background: #fff;
+    cursor: default;
+  }
+
   @media screen and (min-width: 1024px) {
     .popup__save-button {
       min-height: 50px;
