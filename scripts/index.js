@@ -1,3 +1,5 @@
+import {Card} from './card.js';
+
 // Массив со стартовым набором карточек
 
 const initialCards = [
@@ -47,109 +49,78 @@ const inputFotoLink = document.querySelector('.popup__input_type_foto-link');
 const cardsContainer = document.querySelector('.cards');
 const formAdd = document.querySelector('.popup__form_type_add');
 const buttonClosePopupFoto = document.querySelector('.popup__close-button_type_foto');
-const imagePopupFoto = document.querySelector('.popup__foto');
-const figcaptionPopupFoto = document.querySelector('.popup__figcaption');
+
 
 // Функции
 
-function openPopup(popupType) {
+const openPopup = (popupType) => {
   popupType.classList.add('popup_opened');
   document.addEventListener("keydown", closeOnEscKey);
   popupType.addEventListener("mousedown", closeOnClickOverlay);
-}
+};
 
-function closePopup(popupType) {
+const closePopup = (popupType) => {
   popupType.classList.remove('popup_opened');
   document.removeEventListener("keydown", closeOnEscKey);
   popupType.removeEventListener("mousedown", closeOnClickOverlay);
-}
+};
 
-function openPopupEdit(evt) {
+const openPopupEdit = () => {
   inputName.value=profileName.textContent;
   inputDescription.value=profileDescription.textContent;
   openPopup(popupEdit);
-}
+};
 
-function openPopupAdd(evt) {
-  disableButton(buttonAddNewCard);
+const openPopupAdd = () => {
+  // disableButton(buttonAddNewCard);
   openPopup(popupAdd);
-}
+};
 
-function closePopupEdit() {
+const closePopupEdit = () => {
   closePopup(popupEdit);
-}
+};
 
-function closePopupAdd() {
+const closePopupAdd = () => {
   closePopup(popupAdd);
-}
+};
 
-function closePopupFoto() {
+const closePopupFoto = () => {
   closePopup(popupFoto);
-}
+};
 
-function changeUser(evt) {
+const changeUser = (evt) => {
   evt.preventDefault();
   profileName.textContent=inputName.value;
   profileDescription.textContent=inputDescription.value;
   closePopupEdit();
-  // console.log('Данные пользователя изменены');
-}
-
-// Добавление карточек - мест. При создании каждой карточки добавляется обработчик событий
-// для удаления карточки, для кнопки Like, для открытия модального окна с фотографией
-
-
-function createCard(place = 'не задано', fotoLink = '../images/no-image.jpg') {
-  const template = document.querySelector('#card');
-  const newCard = template.content.querySelector('.cards__item').cloneNode(true);
-  const imageCard = newCard.querySelector('.cards__image');
-  newCard.querySelector('.cards__title').textContent = place;
-  imageCard.src = fotoLink;
-  imageCard.alt = `Изображение места - ${place}`;
-
-  function likeCardOnOff(evt) {
-    evt.target.classList.toggle('cards__like-button_active');
-  }
-
-  function deleteCard(evt) {
-    evt.target.closest('.cards__item').remove();
-  }
-
-  function openPopupFoto(place, fotoLink) {
-    imagePopupFoto.src = fotoLink;
-    imagePopupFoto.alt = `Изображение места - ${place}`;
-    figcaptionPopupFoto.textContent = place;
-    openPopup(popupFoto);
-  }
-
-  function openPopupFotoWithFoto() {
-    openPopupFoto(place, fotoLink);
-  }
-
-  newCard.querySelector('.cards__like-button').addEventListener('click', likeCardOnOff);
-  newCard.querySelector('.cards__trash-button').addEventListener('click', deleteCard);
-  newCard.querySelector('.cards__foto-button').addEventListener('click', openPopupFotoWithFoto);
-
-  return newCard;
-}
-
-function closeOnClickOverlay (evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(evt.target);
-  }
+  console.log('Данные пользователя изменены');
 };
 
-function closeOnEscKey (evt) {
+const closeOnClickOverlay = (evt) => {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target);
+  };
+};
+
+const closeOnEscKey = (evt) => {
   if (evt.key === "Escape") {
     closePopup(document.querySelector(".popup_opened"));
-  }
-}
+  };
+};
 
-function renderCard(place = 'не задано', fotoLink = '../images/no-image.jpg') {
+const createCard = (place, fotoLink) => {
+  const data = {};
+  data.name = place;
+  data.link = fotoLink;
+  const card = new Card(data, openPopup, '#card');
+  return card.createCardElement();
+};
+
+const renderCard = (place = 'не задано', fotoLink = '../images/no-image.jpg') => {
   cardsContainer.prepend(createCard(place, fotoLink));
-}
+};
 
-function addNewCard(evt) {
+const addNewCard = (evt) => {
   evt.preventDefault();
   const cardPlace = inputPlace.value;
   const cardFotoLink = inputFotoLink.value;
@@ -157,8 +128,7 @@ function addNewCard(evt) {
   closePopupAdd();
   inputPlace.value = '';
   inputFotoLink.value = '';
-  // console.log('Новая карточка добавлена');
-}
+};
 
 // Обработчики событий
 
@@ -175,7 +145,7 @@ buttonClosePopupFoto.addEventListener('click', closePopupFoto);
 
 // Добавление на страницу карточек из стартового комплекта
 
-const elements = initialCards.forEach(function(element) {
+initialCards.forEach((element) => {
   cardsContainer.append(createCard(element.name, element.link));
 });
 
