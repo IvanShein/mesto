@@ -1,4 +1,5 @@
-import {Card} from './card.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 
 // Массив со стартовым набором карточек
 
@@ -71,8 +72,13 @@ const openPopupEdit = () => {
   openPopup(popupEdit);
 };
 
+const disableButton = (button) => {
+  button.classList.add('popup__button_disabled');
+  button.disabled = true;
+};
+
 const openPopupAdd = () => {
-  // disableButton(buttonAddNewCard);
+  disableButton(buttonAddNewCard);
   openPopup(popupAdd);
 };
 
