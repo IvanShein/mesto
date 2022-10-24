@@ -6,54 +6,54 @@ export class Card {
       this._link = data.link;
       this._templateSelector = templateSelector;
       this._openPopup = openPopup;
-  }
+  };
 
   _copyCardTemplate() {
     this._template = document.querySelector(this._templateSelector);
     this._newCard = this._template.content.querySelector('.cards__item').cloneNode(true);
     return this._newCard;
-  }
+  };
 
   _likeCardOnOff() {
-    this._newCard.querySelector('.cards__like-button').classList.toggle('cards__like-button_active');
-  }
+    this._likeButton.classList.toggle('cards__like-button_active');
+  };
 
   _deleteCard() {
-    this._newCard.querySelector('.cards__trash-button').closest('.cards__item').remove();
-  }
+    this._newCard.remove();
+    this._newCard = null;
+  };
 
   _openPopupFoto() {
     this._imagePopupFoto = document.querySelector('.popup__foto');
+    this._figcaptionPopupFoto = document.querySelector('.popup__figcaption');
     this._imagePopupFoto.src = this._link;
     this._imagePopupFoto.alt = `Изображение места - ${this._name}`;
-    document.querySelector('.popup__figcaption').textContent = this._name;
+    this._figcaptionPopupFoto.textContent = this._name;
     this._openPopup(popupFoto);
   }
 
-  _openPopupFotoWithFoto() {
-    this._openPopupFoto(this._name, this._link);
-  }
-
-  _setEventListeners() {
-    this._newCard.querySelector('.cards__like-button').addEventListener('click', () => {
+   _setEventListeners() {
+    this._likeButton.addEventListener('click', () => {
       this._likeCardOnOff();
       });
-    this._newCard.querySelector('.cards__trash-button').addEventListener('click', () => {
+    this._trashButton.addEventListener('click', () => {
       this._deleteCard();
       });
-    this._newCard.querySelector('.cards__foto-button').addEventListener('click', () => {
-      this._openPopupFotoWithFoto();
+    this._imageCard.addEventListener('click', () => {
+      this._openPopupFoto();
       });
-  }
+  };
 
   createCardElement() {
     this._newCard = this._copyCardTemplate();
+    this._likeButton = this._newCard.querySelector('.cards__like-button');
+    this._trashButton = this._newCard.querySelector('.cards__trash-button');
     this._imageCard = this._newCard.querySelector('.cards__image');
     this._newCard.querySelector('.cards__title').textContent = this._name;
     this._imageCard.src = this._link;
     this._imageCard.alt = `Изображение места - ${this._name}`;
     this._setEventListeners();
     return this._newCard;
-  }
+  };
 
 };

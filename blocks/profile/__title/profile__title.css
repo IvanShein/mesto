@@ -5,9 +5,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 1.2;
-    /* вместо рекомендованного свойства 'ellipsis' использовано свойство 'clip',
-    так как при появлении здесь многоточия, страница не соответствует макету */
-    text-overflow: clip;
+    text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     max-width: 189px;

@@ -1,4 +1,4 @@
-import {Card} from './card.js';
+import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 
 // Массив со стартовым набором карточек
@@ -30,6 +30,26 @@ const initialCards = [
   }
 ];
 
+// объект с настройками селекторов и классов для валидации, пердается при создании экземпляров класса FormValidator
+
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+// Создание экземпляров класса FormValidator для валидируемых форм, запуск валидации
+
+    const newPlace = new FormValidator(config, document.forms.newPlace);
+    newPlace.enableValidation();
+
+    const editProfile = new FormValidator(config, document.forms.editProfile);
+    editProfile.enableValidation();
+
+
 // Глобальные переменные
 
 const popupEdit = document.querySelector('.popup_type_edit');
@@ -43,14 +63,12 @@ const profileDescription = document.querySelector('.profile__subtitle');
 const popupAdd = document.querySelector('.popup_type_add');
 const buttonOpenPopupAdd = document.querySelector('.profile__add-button');
 const buttonClosePopupAdd = document.querySelector('.popup__close-button_type_add');
-const buttonAddNewCard = document.querySelector('.popup__button_type_add-card');
 const popupFoto = document.querySelector('.popup_type_foto');
 const inputPlace = document.querySelector('.popup__input_type_place');
 const inputFotoLink = document.querySelector('.popup__input_type_foto-link');
 const cardsContainer = document.querySelector('.cards');
 const formAdd = document.querySelector('.popup__form_type_add');
 const buttonClosePopupFoto = document.querySelector('.popup__close-button_type_foto');
-
 
 // Функции
 
@@ -67,18 +85,16 @@ const closePopup = (popupType) => {
 };
 
 const openPopupEdit = () => {
+  editProfile._resetValidation();
   inputName.value=profileName.textContent;
   inputDescription.value=profileDescription.textContent;
   openPopup(popupEdit);
 };
 
-const disableButton = (button) => {
-  button.classList.add('popup__button_disabled');
-  button.disabled = true;
-};
-
 const openPopupAdd = () => {
-  disableButton(buttonAddNewCard);
+  newPlace._resetValidation();
+  inputPlace.value = '';
+  inputFotoLink.value = '';
   openPopup(popupAdd);
 };
 
@@ -99,7 +115,6 @@ const changeUser = (evt) => {
   profileName.textContent=inputName.value;
   profileDescription.textContent=inputDescription.value;
   closePopupEdit();
-  console.log('Данные пользователя изменены');
 };
 
 const closeOnClickOverlay = (evt) => {
