@@ -169,24 +169,3 @@ buttonClosePopupFoto.addEventListener('click', closePopupFoto);
 initialCards.forEach((element) => {
   cardsContainer.append(createCard(element.name, element.link));
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
