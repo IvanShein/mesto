@@ -85,16 +85,16 @@ const closePopup = (popupType) => {
 };
 
 const openPopupEdit = () => {
-  editProfile._resetValidation();
+  editProfile.resetValidation();
   inputName.value=profileName.textContent;
   inputDescription.value=profileDescription.textContent;
   openPopup(popupEdit);
 };
 
 const openPopupAdd = () => {
-  newPlace._resetValidation();
   inputPlace.value = '';
   inputFotoLink.value = '';
+  newPlace.resetValidation();
   openPopup(popupAdd);
 };
 
