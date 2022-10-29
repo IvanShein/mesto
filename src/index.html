@@ -8,7 +8,7 @@
   <meta name="description" content="Сайт для публикации фотографий - Mesto">
   <meta name="keywords" content="Фотографии, посмотреть фотографии, опубликовать фото">
   <meta name="author" content="Иван Шеин">
-  <link rel="stylesheet" href="./pages/index.css">
+
   <title>Mesto - сайт для ваших любимых фотографий</title>
 </head>
 
@@ -18,7 +18,7 @@
   <!-- Header -->
 
   <header class="header">
-    <img class="header__logo" src=./images/mesto_logo.svg alt="Место Россия - логотип">
+    <img class="header__logo" src= "<%=require('./images/mesto_logo.svg')%>"   alt="Место Россия - логотип">
   </header>
 
   <!-- Main content -->
@@ -28,7 +28,7 @@
     <!-- Section Profile -->
 
     <section class="profile">
-      <img class="profile__avatar" src="./images/profile__image.png" alt="Фотография пользователя - Аватар">
+      <img class="profile__avatar" src= "<%=require('./images/profile__image.png')%>" alt="Фотография пользователя - Аватар">
       <div class="profile__info">
         <div class="profile__name">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -61,8 +61,7 @@
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <!-- <form novalidate name="editProfile" action="#" class="popup__form popup__form_type_edit"> -->
-      <form  name="editProfile" action="#" class="popup__form popup__form_type_edit" novalidate>
+        <form  name="editProfile" action="#" class="popup__form popup__form_type_edit" novalidate>
 
         <input class="popup__input popup__input_type_name" id="name" name="name" type="text" placeholder="Имя" minlength="2" maxlength="40" required>
         <span class="popup__error popup__error_visible name-error"></span>
@@ -83,10 +82,10 @@
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <form name="newPlace" action="#" class="popup__form popup__form_type_add" novalidate>
-          <input class="popup__input popup__input_type_place" id="place" name="place" type="text" placeholder="Место" minlength="2" maxlength="30" required>
+          <input class="popup__input popup__input_type_place" id="place" name="name" type="text" placeholder="Место" minlength="2" maxlength="30" required>
           <span class="popup__error popup__error_visible place-error"></span>
 
-          <input class="popup__input popup__input_type_foto-link" id="foto-link" name="foto-link" type="url" placeholder="Ссылка на картинку" required>
+          <input class="popup__input popup__input_type_foto-link" id="foto-link" name="link" type="url" placeholder="Ссылка на картинку" required>
           <span class="popup__error popup__error_visible foto-link-error"></span>
 
         <button type="submit" class="popup__button popup__button_type_add-card">Создать</button>
@@ -113,9 +112,9 @@
 
   <template id="card">
 
-    <li class="cards__item">
+    <li id="container"  class="cards__item">
       <a href="#" class = "cards__foto-button">
-        <img class="cards__image" src="../images/no_foto.jpg" onerror="this.src='../images/no_foto.jpg'" alt="Изображение места">
+        <img class="cards__image" src= "<%=require('./images/no_foto.jpg')%>"  onerror="this.src='<%=require('./images/no_foto.jpg')%>'" alt="Изображение места">
       </a>
       <div class="cards__info">
         <h2 class="cards__title"></h2>
@@ -132,7 +131,6 @@
 
   </template>
 
-  <script type="module" src="./scripts/index.js"></script>
 
 </body>
 
