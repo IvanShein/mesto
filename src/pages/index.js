@@ -37,15 +37,14 @@ export const initialCards = [
 
 // Глобальные переменные
 
-export const nameInput = document.querySelector('.popup__input_type_name');
-export const jobInput = document.querySelector('.popup__input_type_description');
-export const profileName = document.querySelector('.profile__title');
-export const profileJob = document.querySelector('.profile__subtitle');
-export const editButton = document.querySelector('.profile__edit-button');
-export const addButton = document.querySelector('.profile__add-button');
-export const photoFlexItem = '.cards';
-export const imageModal = document.querySelector('.popup__foto');
-export const imageModalTitle = document.querySelector('.popup__figcaption');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_description');
+const nameSelector = '.profile__title';
+const jobSelector = '.profile__subtitle';
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+const cardsContainerSelector = '.cards';
+
 
 // объект с настройками селекторов и классов для валидации, пердается при создании экземпляров класса FormValidator
 export const enableValidationConfig = {
@@ -76,7 +75,7 @@ enableValidity(enableValidationConfig);
 function createCard(cardInfo) {
   const cardElement = new Card(cardInfo, '#card', () => {
     {popupWithImage.open(cardInfo)}
-    console.log('Это мы передаем в попап как cardinfo', cardInfo);
+
   }).generateCard();
 
   return cardElement;
@@ -89,7 +88,7 @@ const cards = new Section({
     cards.addItem(createCard(data));
     },
   },
-  photoFlexItem
+  cardsContainerSelector
 );
 cards.renderItems();
 
@@ -122,14 +121,14 @@ const popupEdit = new PopupWithForm({
 });
 popupEdit.setEventListeners();
 
-const userInfo = new UserInfo(profileName, profileJob);
+const userInfo = new UserInfo({nameSelector, jobSelector});
 
 
 editButton.addEventListener('click', () => {
   popupEdit.open();
   const formEdit = popupEdit.getformPopup();
   const el = userInfo.getUserInfo();
-  console.log ('getUserInfo взял это', el);
+
   nameInput.value = el.name;
   jobInput.value = el.job;
   formValidator[formEdit.getAttribute('name')].validityReset();

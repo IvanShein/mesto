@@ -28,7 +28,7 @@ export default class FormValidator {
 
 
   _checkValidity(el) {
-    this._closeError(el);
+
     if (!el.validity.valid) {
       this._showError(el)
     } else {
