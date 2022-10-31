@@ -138,3 +138,4 @@ editButton.addEventListener('click', () => {
 function submitProfileFormHandler(el){
   userInfo.setUserInfo(nameInput.value, jobInput.value);
 }
+
