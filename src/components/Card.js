@@ -45,17 +45,27 @@ export default class Card {
     });
   };
 
+  activateTrashButton() {
+    this._trash.classList.add('cards__trash-button_active');
+  };
+
   generateCard() {
     this._element = this._getTemplate();
 
-    this._imgCardName = this._element.querySelector('.cards__title');
+    this._imgCardNameElement = this._element.querySelector('.cards__title');
     this._imgCardLink = this._element.querySelector('.cards__image');
     this._like = this._element.querySelector('.cards__like-button');
     this._trash = this._element.querySelector('.cards__trash-button');
 
-    this._imgCardName.textContent = this._imageNameCard;
+    this._imgCardNameElement.textContent = this._imageNameCard;
     this._imgCardLink.src = this._imageLinkCard;
     this._imgCardLink.alt = this._imageNameCard;
+
+    if(this._imageNameCard.length > 6){
+      this.activateTrashButton();
+    }
+
+
 
     this._setEventListeners();
     return this._element;

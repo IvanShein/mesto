@@ -41,26 +41,31 @@ const api = new Api({
 
 const userInfo = new UserInfo({profileNameSelector , profileJobSelector, profileAvatarSelector});
 
-// console.log('это апи ', api);
+function loadFromServerUserInformation() {
 api.getUserInformation()
 .then(data => {
-  console.log ('Это данные пользователя с сервера:', data);
-  userInfo.setUserInfo(data.name, data.about);
+  userInfo.setUserInfo(data.name, data.about, data._id);
   userInfo.setUserAvatar(data.avatar);
-  console.log ('User объект:', userInfo);
   return userInfo
 })
   .then(userInfo => {
-    console.log('User объект на следующий then:', userInfo);
-    userInfo.renderUserData();
-  });
+    userInfo.renderUserData()
+  })
+  .then(() => console.log('следующий зен '))
+};
+
+loadFromServerUserInformation();
+// .then(dataUser => {
+//   api.getInitialCards(dataUser)
+// })
+//   .then((data) => {
+//     renderInitialCards(data);
+//   });
 
 api.getInitialCards()
-.then(data => {
-  renderInitialCards(data);
-});
-
-
+  .then((data) => {
+    renderInitialCards(data);
+  });
 
 // initialCards = Array.from (initialCards);
 // console.log ('Это ПЕРВОНАЧАЛЬНЫЕ карточки:', initialCard);
@@ -150,7 +155,9 @@ editButton.addEventListener('click', () => {
 });
 
 
-function submitProfileFormHandler(el){
-  userInfo.setUserInfo(nameInput.value, jobInput.value);
+function submitProfileFormHandler(){
+
+  api.sendUserInformation(nameInput.value, jobInput.value)
+  .then(loadFromServerUserInformation());
 }
 

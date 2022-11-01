@@ -22,6 +22,20 @@ export default class Api {
 
   };
 
+  sendUserInformation(newName, newJob) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: newName,
+        about: newJob
+      })
+    })
+      .then(this._handleServerResponse)
+
+  };
+
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
