@@ -20,7 +20,8 @@
 .cards__title{font-size:24px;font-weight:900;line-height:1.2;margin:0;max-width:200px;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}
 .cards__like-button{align-self:center;background-color:unset;background-image:url(0bc60938ca96a5dcae18.svg);background-position:50%;background-repeat:no-repeat;border:0;box-sizing:border-box;height:19px;margin:0;padding:0 0 0 1px;transition:.2s;width:22px}.cards__like-button:hover{cursor:pointer;opacity:.5;transition:.2s}
 .cards__like-button_active{background-image:url(fe17a515669479b1e649.svg)}
-.cards__trash-button{background-color:unset;background-image:url(cbc09a894bdd4c956365.svg);background-position:50%;background-repeat:no-repeat;border:0;height:19px;margin:0;padding:0;position:absolute;right:20px;top:20px;transition:.2s;width:18px}.cards__trash-button:hover{cursor:pointer;opacity:.6;transition:.2s}
+.cards__trash-button{background-color:unset;background-image:url(cbc09a894bdd4c956365.svg);background-position:50%;background-repeat:no-repeat;border:0;display:none;height:19px;margin:0;padding:0;position:absolute;right:20px;top:20px;transition:.2s;width:18px}.cards__trash-button:hover{cursor:pointer;opacity:.6;transition:.2s}
+.cards__trash-button_active{display:inline-block}
 .cards__foto-button{margin:0;padding:0}
 .footer{margin:0;padding:51px 0 36px 19px}@media screen and (min-width:1024px){.footer{margin:0 auto;max-width:880px;padding:67px 0 60px;width:100%}}
 .footer__copyright{color:#545454;font-size:14px;line-height:1.2;margin:0;padding:0}@media screen and (min-width:1024px){.footer__copyright{font-size:18px}}
