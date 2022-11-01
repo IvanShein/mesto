@@ -35,6 +35,6 @@
 * Подключить проект к серверу
 
 ## Ссылка на сайт:
-https://mesto-ivan-shein.vercel.app
+https://ivanshein.github.io/mesto/
 
 ---

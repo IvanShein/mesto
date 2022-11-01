@@ -12,6 +12,7 @@
   top: 20px;
   right: 20px;
   transition: .2s;
+  display: none;
 }
 
 .cards__trash-button:hover {

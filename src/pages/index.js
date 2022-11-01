@@ -4,11 +4,11 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js'
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 
 import "./index.css"
 
-// Массив со стартовым набором карточек
-export const initialCards = [
+const initialCard = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -35,6 +35,9 @@ export const initialCards = [
   }
 ];
 
+
+
+
 // Глобальные переменные
 
 const nameInput = document.querySelector('.popup__input_type_name');
@@ -44,7 +47,6 @@ const jobSelector = '.profile__subtitle';
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const cardsContainerSelector = '.cards';
-
 
 // объект с настройками селекторов и классов для валидации, пердается при создании экземпляров класса FormValidator
 export const enableValidationConfig = {
@@ -56,9 +58,33 @@ export const enableValidationConfig = {
   errorClass: 'popup__error_visible'
 };
 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-52',
+  headers: {
+    authorization: 'd415efd6-2d04-408b-a1d7-6b65d68d7d92',
+    'Content-Type': 'application/json'
+  }
+});
 
-const formValidator = new Object();
+// console.log('это апи ', api);
+api.getInitialCards()
+.then(data => {
+  renderInitialCards(data);
+  console.log ('Это полученные карточки:', data);
+});
 
+// initialCards = Array.from (initialCards);
+// console.log ('Это ПЕРВОНАЧАЛЬНЫЕ карточки:', initialCard);
+// console.log ('Это новые карточки:', initialCards);
+
+// Массив со стартовым набором карточек
+// const initialCards = api.getInitialCards().then(data);
+
+
+const userInfo = new UserInfo({nameSelector, jobSelector});
+
+
+const formValidator = {};
 function enableValidity(el) {
   const form = Array.from(document.querySelectorAll(el.formSelector))
   form.forEach((form) => {
@@ -81,7 +107,7 @@ function createCard(cardInfo) {
   return cardElement;
 };
 
-
+function renderInitialCards(initialCards) {
 const cards = new Section({
   items: initialCards,
   renderer: (data) => {
@@ -91,7 +117,7 @@ const cards = new Section({
   cardsContainerSelector
 );
 cards.renderItems();
-
+}
 
 const popupWithImage = new PopupWithImage('.popup_type_foto')
 popupWithImage.setEventListeners();
@@ -121,7 +147,7 @@ const popupEdit = new PopupWithForm({
 });
 popupEdit.setEventListeners();
 
-const userInfo = new UserInfo({nameSelector, jobSelector});
+
 
 
 editButton.addEventListener('click', () => {
@@ -138,4 +164,4 @@ editButton.addEventListener('click', () => {
 function submitProfileFormHandler(el){
   userInfo.setUserInfo(nameInput.value, jobInput.value);
 }
-// комментарий тест нового ssh
+
