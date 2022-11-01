@@ -5,7 +5,7 @@ export default class PopupWithImage extends Popup {
     super(popupSelector);
     this._imageModal = this._popup.querySelector('.popup__foto');
     this._imageModalTitle = this._popup.querySelector('.popup__figcaption');
-  }
+  };
 
   open(element) {
     super.open()
@@ -13,4 +13,4 @@ export default class PopupWithImage extends Popup {
     this._imageModal.alt = element.name;
     this._imageModalTitle.textContent = element.name;
   };
-};
+}

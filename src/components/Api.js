@@ -2,25 +2,36 @@ export default class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
-  }
+  };
 
+  _handleServerResponse(response) {
+    if (response.ok) {
+      return response.json();
+    }
+    return Promise.reject(`Ошибка: ${response.status} ${response.statusText}`)
+   .catch((error) => {
+    console.log(error);
+  });
+  };
+
+  getUserInformation() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+    })
+      .then(this._handleServerResponse)
+
+  };
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
+      .then(this._handleServerResponse)
 
-        return Promise.reject(`Ошибка: ${response.status} ${response.statusText}`);
-      })
-       .catch((error) => {
-        console.log(error); // выведем ошибку в консоль
-      });
+  };
 
-}
+
+
 
   // другие методы работы с API
 }

@@ -8,42 +8,14 @@ import Api from '../components/Api.js';
 
 import "./index.css"
 
-const initialCard = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-
-
 
 // Глобальные переменные
 
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_description');
-const nameSelector = '.profile__title';
-const jobSelector = '.profile__subtitle';
+const profileNameSelector = '.profile__title';
+const profileJobSelector = '.profile__subtitle';
+const profileAvatarSelector = '.profile__avatar';
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const cardsContainerSelector = '.cards';
@@ -66,12 +38,29 @@ const api = new Api({
   }
 });
 
+
+const userInfo = new UserInfo({profileNameSelector , profileJobSelector, profileAvatarSelector});
+
 // console.log('это апи ', api);
+api.getUserInformation()
+.then(data => {
+  console.log ('Это данные пользователя с сервера:', data);
+  userInfo.setUserInfo(data.name, data.about);
+  userInfo.setUserAvatar(data.avatar);
+  console.log ('User объект:', userInfo);
+  return userInfo
+})
+  .then(userInfo => {
+    console.log('User объект на следующий then:', userInfo);
+    userInfo.renderUserData();
+  });
+
 api.getInitialCards()
 .then(data => {
   renderInitialCards(data);
-  console.log ('Это полученные карточки:', data);
 });
+
+
 
 // initialCards = Array.from (initialCards);
 // console.log ('Это ПЕРВОНАЧАЛЬНЫЕ карточки:', initialCard);
@@ -81,7 +70,7 @@ api.getInitialCards()
 // const initialCards = api.getInitialCards().then(data);
 
 
-const userInfo = new UserInfo({nameSelector, jobSelector});
+
 
 
 const formValidator = {};
@@ -117,7 +106,7 @@ const cards = new Section({
   cardsContainerSelector
 );
 cards.renderItems();
-}
+};
 
 const popupWithImage = new PopupWithImage('.popup_type_foto')
 popupWithImage.setEventListeners();

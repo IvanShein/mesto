@@ -35,4 +35,4 @@ export default class Popup {
       });
       this._popup.addEventListener('mousedown', this._handleClickOnOverlay);
   };
-};
+}

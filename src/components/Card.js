@@ -6,7 +6,7 @@ export default class Card {
     this._imageLinkCard = cardInfo.link;
     this._handleCardClick = handleCardClick;
     this._cardInfo = cardInfo;
-  }
+  };
 
     _getTemplate() {
     const template = document
@@ -16,22 +16,22 @@ export default class Card {
     .cloneNode(true);
 
     return template;
-  }
+  };
 
   _handleClickImgOpenFullscreen() {
     this._handleCardClick(this._imageNameCard, this._imageLinkCard);
-  }
+  };
 
 
   _handleClickDelete() {
     this._element.remove();
     this._element =  null;
-  }
+  };
 
 
   _handleClickLike() {
     this._like.classList.toggle('cards__like-button_active');
-  }
+  };
 
   _setEventListeners() {
     this._imgCardLink.addEventListener('click', () => {
@@ -43,7 +43,7 @@ export default class Card {
     this._like.addEventListener('click', () => {
       this._handleClickLike();
     });
-  }
+  };
 
   generateCard() {
     this._element = this._getTemplate();
@@ -59,6 +59,6 @@ export default class Card {
 
     this._setEventListeners();
     return this._element;
-  }
+  };
 
 }

@@ -6,19 +6,18 @@ export default class PopupWithForm extends Popup {
     this._formPopup = this._popup.querySelector('.popup__form');
     this._inputList = this._popup.querySelectorAll('.popup__input');
     this._submitProfileFormHandler = submitProfileFormHandler;
-  }
-
+  };
 
   getformPopup() {
     return this._formPopup;
-  }
+  };
 
   _getInputValues() {
     this._formValues = {};
     this._inputList.forEach((input) =>
      this._formValues[input.name] = input.value);
     return this._formValues;
-  }
+  };
 
   setEventListeners() {
     super.setEventListeners();
@@ -28,10 +27,10 @@ export default class PopupWithForm extends Popup {
       this._submitProfileFormHandler(this._getInputValues());
       this.close();
     });
-  }
+  };
 
   close() {
     super.close()
     this._formPopup.reset();
-  }
+  };
 }

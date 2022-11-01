@@ -3,7 +3,7 @@ export default class Section {
     this._items = items;
     this._renderer = renderer;
     this._container = document.querySelector(selectorContainer);
-  }
+  };
 
   renderItems() {
     this._items.forEach((item) =>
@@ -14,4 +14,4 @@ export default class Section {
   addItem(cardAdd) {
     this._container.prepend(cardAdd);
   };
-};
+}
