@@ -28,7 +28,13 @@
     <!-- Section Profile -->
 
     <section class="profile">
-      <img class="profile__avatar" src= "<%=require('./images/profile__image.png')%>" alt="Фотография пользователя - Аватар">
+      <div class="profile__avatar-container" >
+        <img class="profile__avatar"
+          src= "<%=require('./images/profile__image.png')%>"
+          alt="Фотография пользователя - Аватар">
+        <div class="profile__avatar-edit"></div>
+      </div>
+
       <div class="profile__info">
         <div class="profile__name">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -79,12 +85,12 @@
   <!-- Pop-Up Avatar editor -->
 
   <div class="popup popup_type_edit-avatar">
-    <div class="popup__container">
+    <div class="popup__container popup__container_type_avatar">
       <h2 class="popup__title">Обновить аватар</h2>
       <!-- скорректировать класс- +avatar -->
         <form  name="editAvatar" action="#" class="popup__form popup__form_type_edit-avatar" novalidate>
       <!-- скорректировать класс -->
-        <input class="popup__input popup__input_type_avatar" id="avatar" name="avatar" type="text" placeholder="Ссылка на новое фото профиля" minlength="2" maxlength="200" required>
+        <input class="popup__input popup__input_type_avatar" id="avatar" name="avatar" type="url" placeholder="Ссылка на новое фото профиля" required>
         <span class="popup__error popup__error_visible avatar-error"></span>
       <!-- скорректировать класс -->
         <button type="submit" class="popup__button popup__button_type_save-avatar">Сохранить</button>

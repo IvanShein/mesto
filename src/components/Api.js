@@ -40,13 +40,12 @@ export default class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: newLink,
+        avatar: newLink
       })
     })
       .then(this._handleServerResponse)
 
   };
-
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
@@ -56,10 +55,21 @@ export default class Api {
 
   };
 
+  sendNewCard(cardInfo) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: cardInfo.name,
+        link: cardInfo.link,
+      })
+    })
+      .then(this._handleServerResponse)
+
+  };
 
 
 
-  // другие методы работы с API
 }
 
 

@@ -14,7 +14,7 @@ const nameInputElement = document.querySelector('.popup__input_type_name');
 const jobInputElement = document.querySelector('.popup__input_type_description');
 const avatarLinkInputElement = document.querySelector('.popup__input_type_avatar');
 const editButtonElement = document.querySelector('.profile__edit-button');
-const profileAvatarElement = document.querySelector('.profile__avatar');
+const profileAvatarEditElement = document.querySelector('.profile__avatar-edit');
 const addButtonElement = document.querySelector('.profile__add-button');
 
 const profileNameSelector = '.profile__title';
@@ -42,6 +42,7 @@ const api = new Api({
 
 
 const userInfo = new UserInfo({profileNameSelector , profileJobSelector, profileAvatarSelector});
+
 const cards = new Section({
   items: [],
   renderer: (data) => {
@@ -61,7 +62,6 @@ return api.getUserInformation()
   .then(userInfo => {
     userInfo.renderUserData()
   })
-  .then(() => console.log('следующий зен '))
 };
 
 // используется последовательность промисов, чтобы карточки
@@ -90,11 +90,10 @@ enableValidity(enableValidationConfig);
 
 
 function createCard(cardInfo) {
-  const cardElement = new Card(cardInfo, '#card', () => {
-    {popupWithImage.open(cardInfo)}
-
-  }).generateCard();
-
+  const card = new Card(cardInfo, '#card', () => {
+    popupWithImage.open(cardInfo);
+  });
+  const cardElement = card.generateCard();
   return cardElement;
 };
 
@@ -107,16 +106,17 @@ const popupWithImage = new PopupWithImage('.popup_type_foto')
 popupWithImage.setEventListeners();
 
 
-
 const popupAdd = new PopupWithForm({
   popupSelector: '.popup_type_add',
-  submitProfileFormHandler: (data) => {
-    cards.addItem(createCard(data));
-    },
+  submitFormHandler: submitAddNewCard
 });
 popupAdd.setEventListeners();
 
-
+function submitAddNewCard(cardInfo) {
+const cardElement = createCard(cardInfo);
+api.sendNewCard(cardInfo)
+.then(() => {cards.addItem(cardElement)});
+};
 
 addButtonElement.addEventListener('click', () => {
   popupAdd.open();
@@ -129,22 +129,15 @@ function submitProfileAvatarFormHandler(){
   .then(() => {return Promise.resolve(loadFromServerUserInformation())})
 };
 
-// создать новую модификацию класа
+
 const popupEditAvatar = new PopupWithForm({
   popupSelector: '.popup_type_edit-avatar',
-  submitProfileFormHandler: submitProfileAvatarFormHandler
+  submitFormHandler: submitProfileAvatarFormHandler
 });
-console.log('это попап аватара', popupEditAvatar);
-
-console.log('это функция обработки сабмита формы аватара', submitProfileAvatarFormHandler);
 popupEditAvatar.setEventListeners();
 
-// function submitProfileAvatarFormHandler(){
-//   api.sendUserAvatarLink(avatarLinkInputElement.value)
-//   .then(() => {return Promise.resolve(loadFromServerUserInformation())})
-// };
 
-profileAvatarElement.addEventListener('click', () => {
+profileAvatarEditElement.addEventListener('click', () => {
   popupEditAvatar.open();
   const formEditAvatar = popupEditAvatar.getformPopup();
   formValidator[formEditAvatar.getAttribute('name')].validityReset();
@@ -154,7 +147,6 @@ editButtonElement.addEventListener('click', () => {
   popupEdit.open();
   const formEdit = popupEdit.getformPopup();
   const user = userInfo.getUserInfo();
-
   nameInputElement.value = user.name;
   jobInputElement.value = user.job;
   formValidator[formEdit.getAttribute('name')].validityReset();
@@ -162,7 +154,7 @@ editButtonElement.addEventListener('click', () => {
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_edit',
-  submitProfileFormHandler
+  submitFormHandler: submitProfileFormHandler
 });
 popupEdit.setEventListeners();
 
@@ -170,5 +162,3 @@ function submitProfileFormHandler(){
   api.sendUserInformation(nameInputElement.value, jobInputElement.value)
   .then(() => {return Promise.resolve(loadFromServerUserInformation())})
 };
-
-console.log('это попап редактирования', popupEdit);
