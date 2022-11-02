@@ -61,7 +61,7 @@ export default class Card {
     this._imgCardLink.src = this._imageLinkCard;
     this._imgCardLink.alt = this._imageNameCard;
 
-    if(this._imageNameCard.length > 6){
+    if(this._imageNameCard.length > 5){
       this.activateTrashButton();
     }
 

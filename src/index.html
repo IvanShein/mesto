@@ -76,6 +76,25 @@
     </div>
   </div>
 
+  <!-- Pop-Up Avatar editor -->
+
+  <div class="popup popup_type_edit-avatar">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <!-- скорректировать класс- +avatar -->
+        <form  name="editAvatar" action="#" class="popup__form popup__form_type_edit-avatar" novalidate>
+      <!-- скорректировать класс -->
+        <input class="popup__input popup__input_type_avatar" id="avatar" name="avatar" type="text" placeholder="Ссылка на новое фото профиля" minlength="2" maxlength="200" required>
+        <span class="popup__error popup__error_visible avatar-error"></span>
+      <!-- скорректировать класс -->
+        <button type="submit" class="popup__button popup__button_type_save-avatar">Сохранить</button>
+      </form>
+
+      <button type="button" aria-label="Кнопка закрыть окно редактирования фото пользователя" class="popup__close-button popup__close-button_type_edit-avatar"></button>
+    </div>
+  </div>
+
+
   <!-- Pop-Up Add new card -->
 
   <div class="popup popup_type_add">

@@ -8,16 +8,18 @@ import Api from '../components/Api.js';
 
 import "./index.css"
 
-
 // Глобальные переменные
 
-const nameInput = document.querySelector('.popup__input_type_name');
-const jobInput = document.querySelector('.popup__input_type_description');
+const nameInputElement = document.querySelector('.popup__input_type_name');
+const jobInputElement = document.querySelector('.popup__input_type_description');
+const avatarLinkInputElement = document.querySelector('.popup__input_type_avatar');
+const editButtonElement = document.querySelector('.profile__edit-button');
+const profileAvatarElement = document.querySelector('.profile__avatar');
+const addButtonElement = document.querySelector('.profile__add-button');
+
 const profileNameSelector = '.profile__title';
 const profileJobSelector = '.profile__subtitle';
 const profileAvatarSelector = '.profile__avatar';
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
 const cardsContainerSelector = '.cards';
 
 // объект с настройками селекторов и классов для валидации, пердается при создании экземпляров класса FormValidator
@@ -40,9 +42,17 @@ const api = new Api({
 
 
 const userInfo = new UserInfo({profileNameSelector , profileJobSelector, profileAvatarSelector});
+const cards = new Section({
+  items: [],
+  renderer: (data) => {
+    cards.addItem(createCard(data));
+    },
+  },
+  cardsContainerSelector
+);
 
 function loadFromServerUserInformation() {
-api.getUserInformation()
+return api.getUserInformation()
 .then(data => {
   userInfo.setUserInfo(data.name, data.about, data._id);
   userInfo.setUserAvatar(data.avatar);
@@ -54,35 +64,22 @@ api.getUserInformation()
   .then(() => console.log('следующий зен '))
 };
 
-loadFromServerUserInformation();
-// .then(dataUser => {
-//   api.getInitialCards(dataUser)
-// })
-//   .then((data) => {
-//     renderInitialCards(data);
-//   });
-
-api.getInitialCards()
+// используется последовательность промисов, чтобы карточки
+// рендерились только после того, как с сервера загрузятся
+// данные пользователя и данные карточек
+loadFromServerUserInformation()
+.then(() => {
+  return api.getInitialCards()
+  })
   .then((data) => {
     renderInitialCards(data);
   });
 
-// initialCards = Array.from (initialCards);
-// console.log ('Это ПЕРВОНАЧАЛЬНЫЕ карточки:', initialCard);
-// console.log ('Это новые карточки:', initialCards);
-
-// Массив со стартовым набором карточек
-// const initialCards = api.getInitialCards().then(data);
-
-
-
-
-
 const formValidator = {};
-function enableValidity(el) {
-  const form = Array.from(document.querySelectorAll(el.formSelector))
+function enableValidity(validationConfig) {
+  const form = Array.from(document.querySelectorAll(validationConfig.formSelector))
   form.forEach((form) => {
-    const validator = new FormValidator(el, form)
+    const validator = new FormValidator(validationConfig, form)
     const name = form.getAttribute('name')
     formValidator[name] = validator;
     validator.enableValidation();
@@ -102,14 +99,7 @@ function createCard(cardInfo) {
 };
 
 function renderInitialCards(initialCards) {
-const cards = new Section({
-  items: initialCards,
-  renderer: (data) => {
-    cards.addItem(createCard(data));
-    },
-  },
-  cardsContainerSelector
-);
+cards.items = initialCards;
 cards.renderItems();
 };
 
@@ -128,12 +118,47 @@ popupAdd.setEventListeners();
 
 
 
-addButton.addEventListener('click', () => {
+addButtonElement.addEventListener('click', () => {
   popupAdd.open();
-  const addButton = popupAdd.getformPopup();
-  formValidator[addButton.getAttribute('name')].validityReset();
+  const addButtonElement = popupAdd.getformPopup();
+  formValidator[addButtonElement.getAttribute('name')].validityReset();
 });
 
+function submitProfileAvatarFormHandler(){
+  api.sendUserAvatarLink(avatarLinkInputElement.value)
+  .then(() => {return Promise.resolve(loadFromServerUserInformation())})
+};
+
+// создать новую модификацию класа
+const popupEditAvatar = new PopupWithForm({
+  popupSelector: '.popup_type_edit-avatar',
+  submitProfileFormHandler: submitProfileAvatarFormHandler
+});
+console.log('это попап аватара', popupEditAvatar);
+
+console.log('это функция обработки сабмита формы аватара', submitProfileAvatarFormHandler);
+popupEditAvatar.setEventListeners();
+
+// function submitProfileAvatarFormHandler(){
+//   api.sendUserAvatarLink(avatarLinkInputElement.value)
+//   .then(() => {return Promise.resolve(loadFromServerUserInformation())})
+// };
+
+profileAvatarElement.addEventListener('click', () => {
+  popupEditAvatar.open();
+  const formEditAvatar = popupEditAvatar.getformPopup();
+  formValidator[formEditAvatar.getAttribute('name')].validityReset();
+});
+
+editButtonElement.addEventListener('click', () => {
+  popupEdit.open();
+  const formEdit = popupEdit.getformPopup();
+  const user = userInfo.getUserInfo();
+
+  nameInputElement.value = user.name;
+  jobInputElement.value = user.job;
+  formValidator[formEdit.getAttribute('name')].validityReset();
+});
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_edit',
@@ -141,23 +166,9 @@ const popupEdit = new PopupWithForm({
 });
 popupEdit.setEventListeners();
 
-
-
-
-editButton.addEventListener('click', () => {
-  popupEdit.open();
-  const formEdit = popupEdit.getformPopup();
-  const el = userInfo.getUserInfo();
-
-  nameInput.value = el.name;
-  jobInput.value = el.job;
-  formValidator[formEdit.getAttribute('name')].validityReset();
-});
-
-
 function submitProfileFormHandler(){
+  api.sendUserInformation(nameInputElement.value, jobInputElement.value)
+  .then(() => {return Promise.resolve(loadFromServerUserInformation())})
+};
 
-  api.sendUserInformation(nameInput.value, jobInput.value)
-  .then(loadFromServerUserInformation());
-}
-
+console.log('это попап редактирования', popupEdit);

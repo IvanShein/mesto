@@ -27,12 +27,11 @@ export default class FormValidator {
   };
 
 
-  _checkValidity(el) {
-
-    if (!el.validity.valid) {
-      this._showError(el)
+  _checkValidity(element) {
+    if (!element.validity.valid) {
+      this._showError(element)
     } else {
-      this._closeError(el)
+      this._closeError(element)
     };
   };
 
@@ -56,8 +55,8 @@ export default class FormValidator {
 
 
   validityReset() {
-    this._inputs.forEach((el) => {
-      this._closeError(el);
+    this._inputs.forEach((element) => {
+      this._closeError(element);
     });
     this._setButtonStateSave();
   };
@@ -65,9 +64,9 @@ export default class FormValidator {
 
   enableValidation() {
     this._setButtonStateSave();
-    this._inputs.forEach((el) => {
-      el.addEventListener('input', () => {
-        this._checkValidity(el);
+    this._inputs.forEach((element) => {
+      element.addEventListener('input', () => {
+        this._checkValidity(element);
         this._setButtonStateSave();
       });
     });

@@ -35,6 +35,18 @@ export default class Api {
 
   };
 
+  sendUserAvatarLink(newLink) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: newLink,
+      })
+    })
+      .then(this._handleServerResponse)
+
+  };
+
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
