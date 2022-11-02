@@ -28,7 +28,9 @@
 @import url(../blocks/cards/__image/cards__image.css);
 @import url(../blocks/cards/__info/cards__info.css);
 @import url(../blocks/cards/__title/cards__title.css);
+@import url(../blocks/cards/__like-container/cards__like-container.css);
 @import url(../blocks/cards/__like-button/cards__like-button.css);
+@import url(../blocks/cards/__number-likes/cards__number-likes.css);
 @import url(../blocks/cards/__like-button/_active/cards__like-button_active.css);
 @import url(../blocks/cards/__trash-button/cards__trash-button.css);
 @import url(../blocks/cards/__trash-button/_active/cards__trash-button_active.css);

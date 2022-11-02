@@ -64,16 +64,21 @@ return api.getUserInformation()
   })
 };
 
+function renderCardsFromServer() {
+  api.getInitialCards()
+  .then((data) => {
+    renderInitialCards(data)
+  })
+};
+
 // используется последовательность промисов, чтобы карточки
 // рендерились только после того, как с сервера загрузятся
 // данные пользователя и данные карточек
 loadFromServerUserInformation()
 .then(() => {
-  return api.getInitialCards()
-  })
-  .then((data) => {
-    renderInitialCards(data);
-  });
+  console.log('функция превый раз', renderCardsFromServer);
+  renderCardsFromServer()
+});
 
 const formValidator = {};
 function enableValidity(validationConfig) {
@@ -113,10 +118,12 @@ const popupAdd = new PopupWithForm({
 popupAdd.setEventListeners();
 
 function submitAddNewCard(cardInfo) {
-const cardElement = createCard(cardInfo);
 api.sendNewCard(cardInfo)
-.then(() => {cards.addItem(cardElement)});
-};
+.then((cardData) => {
+  const cardElement = createCard(cardData);
+  cards.addItemToTop(cardElement);
+});
+}
 
 addButtonElement.addEventListener('click', () => {
   popupAdd.open();

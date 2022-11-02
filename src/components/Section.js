@@ -12,6 +12,10 @@ export default class Section {
   };
 
   addItem(cardAdd) {
+    this._container.append(cardAdd);
+  };
+
+  addItemToTop(cardAdd) {
     this._container.prepend(cardAdd);
   };
 }

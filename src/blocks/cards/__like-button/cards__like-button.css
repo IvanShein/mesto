@@ -12,7 +12,7 @@
   transition: .2s;
   border: 0;
 }
-  
+
 .cards__like-button:hover {
   opacity: 0.5;
   transition: .2s;
