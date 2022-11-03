@@ -33,6 +33,7 @@ export const enableValidationConfig = {
   errorClass: 'popup__error_visible'
 };
 
+// Настройки для модуля Api
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-52',
   headers: {
@@ -53,6 +54,7 @@ const cards = new Section({
   cardsContainerSelector
 );
 
+// загрузка с сервера данных пользователя
 function loadFromServerUserInformation() {
 return api.getUserInformation()
 .then(data => {
@@ -96,7 +98,7 @@ enableValidity(enableValidationConfig);
 function submitDeleteConfirmationHandler(card, cardId) {
   api.deleteCard(cardId)
   .then(() => {
-    card._deleteCardElement();
+    card.deleteCardElement();
     popupWithConfirmation.close();
   });
 };
@@ -113,13 +115,13 @@ popupWithConfirmation.setEventListeners();
 
 function handleClickLike(card) {
   if(card.isCardLiked) {
-    api.deleteCardLike(card._cardId)
+    api.deleteCardLike(card.cardId)
     .then((cardInfo) => {
       card.setCardLikes(cardInfo.likes)
     })
   }
   else {
-    api.sendCardLike(card._cardId)
+    api.sendCardLike(card.cardId)
     .then((cardInfo) => {
       card.setCardLikes(cardInfo.likes)
     })
@@ -127,7 +129,7 @@ function handleClickLike(card) {
 };
 
 function createCard(cardInfo) {
-  const card = new Card(cardInfo, userInfo._id, '#card', handleClickDelete, handleClickLike, () => {
+  const card = new Card(cardInfo, userInfo.id, '#card', handleClickDelete, handleClickLike, () => {
     popupWithImage.open(cardInfo);
   });
   const cardElement = card.generateCard();

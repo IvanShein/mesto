@@ -3,7 +3,7 @@ export default class Card {
   constructor(cardInfo, userId, templateSelector, handleClickDelete, handleClickLike, handleCardClick) {
     this._templateSelector = templateSelector;
     this._cardUserId = userId;
-    this._cardId = cardInfo._id;
+    this.cardId = cardInfo._id;
     this._cardName = cardInfo.name;
     this._cardFotoLink = cardInfo.link;
     this.likes = cardInfo.likes;
@@ -31,7 +31,7 @@ export default class Card {
   };
 
 
-  _deleteCardElement() {
+  deleteCardElement() {
     this._element.remove();
     this._element =  null;
   };
@@ -69,14 +69,14 @@ export default class Card {
       this._handleClickImgOpenFullscreen();
     });
     this._cardTrashButtonElement.addEventListener('click', () => {
-      this._handleClickDelete(this, this._cardId);
+      this._handleClickDelete(this, this.cardId);
     });
     this._cardLikeButtonElement.addEventListener('click', () => {
       this._handleClickLike(this);
     });
   };
 
-  activateTrashButton() {
+  _activateTrashButton() {
     this._cardTrashButtonElement.classList.add('cards__trash-button_active');
   };
 
@@ -95,10 +95,8 @@ export default class Card {
     this.setCardLikes(this.likes);
 
     if(this._cardUserId === this._cardOwnerId){
-      this.activateTrashButton();
+      this._activateTrashButton();
     }
-
-
 
     this._setEventListeners();
     return this._element;

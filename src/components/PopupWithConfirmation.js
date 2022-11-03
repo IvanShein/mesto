@@ -19,12 +19,6 @@ export default class PopupWithConfirmation extends Popup {
     this.cardId = cardId;
   };
 
-  // submitDeleteConfirmation(event) {
-  //   event.preventDefault();
-  //   this._submitDeleteConfirmationHandler(this.card, this.cardId);
-  //   this.close();
-  // }
-
   setEventListeners() {
     super.setEventListeners();
     this._formPopupElement.addEventListener('submit', (event) => {
@@ -32,10 +26,6 @@ export default class PopupWithConfirmation extends Popup {
     this._submitDeleteConfirmationHandler(this.card, this.cardId);
     });
   };
-
-  // removeEventListeners() {
-  //   this._formPopupElement.removeEventListener('submit', this.submitDeleteConfirmation.bind(this));
-  // };
 
   close() {
     super.close()
