@@ -150,11 +150,13 @@ const popupAdd = new PopupWithForm({
 popupAdd.setEventListeners();
 
 function submitAddNewCard(cardInfo) {
+popupAdd.changeSubmitButtonText('Сохранение...');
 api.sendNewCard(cardInfo)
-.then((cardData) => {
-  const cardElement = createCard(cardData);
-  cards.addItemToTop(cardElement);
-});
+  .then((cardData) => {
+    const cardElement = createCard(cardData);
+    cards.addItemToTop(cardElement);
+  })
+    .finally(() => {popupAdd.changeSubmitButtonText('Создать')})
 }
 
 addButtonElement.addEventListener('click', () => {
@@ -164,8 +166,12 @@ addButtonElement.addEventListener('click', () => {
 });
 
 function submitProfileAvatarFormHandler(){
+  popupEditAvatar.changeSubmitButtonText('Сохранение...');
   api.sendUserAvatarLink(avatarLinkInputElement.value)
-  .then(() => {return Promise.resolve(loadFromServerUserInformation())})
+    .then(() => {
+      return Promise.resolve(loadFromServerUserInformation())
+    })
+      .finally(() => {popupEditAvatar.changeSubmitButtonText('Сохранить')})
 };
 
 
@@ -198,6 +204,9 @@ const popupEdit = new PopupWithForm({
 popupEdit.setEventListeners();
 
 function submitProfileFormHandler(){
+  popupEdit.changeSubmitButtonText('Сохранение...');
   api.sendUserInformation(nameInputElement.value, jobInputElement.value)
-  .then(() => {return Promise.resolve(loadFromServerUserInformation())})
+    .then(() => {return Promise.resolve(loadFromServerUserInformation())
+    })
+      .finally(() => {popupEdit.changeSubmitButtonText('Сохранить')})
 };
