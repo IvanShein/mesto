@@ -4,7 +4,6 @@
   margin: 0 auto;
   height: 120px;
   width: 120px;
-  border-radius: 50%;
   background-color: black;
   opacity: 0;
   transition: .2s;
