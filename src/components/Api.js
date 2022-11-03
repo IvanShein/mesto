@@ -8,7 +8,7 @@ export default class Api {
     if (response.ok) {
       return response.json();
     }
-    return Promise.reject(`Ошибка: ${response.status} ${response.statusText}`)
+    return Promise.reject(`При обращении к серверу возникла ошибка: ${response.status} ${response.statusText}`)
    .catch((error) => {
     console.log(error);
   });
@@ -75,6 +75,22 @@ export default class Api {
     })
       .then(this._handleServerResponse)
 
+  };
+
+  deleteCardLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+      .then(this._handleServerResponse)
+  };
+
+  sendCardLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+      .then(this._handleServerResponse)
   };
 
 }

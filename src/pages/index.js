@@ -111,10 +111,23 @@ const popupWithConfirmation = new PopupWithConfirmation({
 });
 popupWithConfirmation.setEventListeners();
 
-
+function handleClickLike(card) {
+  if(card.isCardLiked) {
+    api.deleteCardLike(card._cardId)
+    .then((cardInfo) => {
+      card.setCardLikes(cardInfo.likes)
+    })
+  }
+  else {
+    api.sendCardLike(card._cardId)
+    .then((cardInfo) => {
+      card.setCardLikes(cardInfo.likes)
+    })
+  }
+};
 
 function createCard(cardInfo) {
-  const card = new Card(cardInfo, userInfo._id, '#card', handleClickDelete, () => {
+  const card = new Card(cardInfo, userInfo._id, '#card', handleClickDelete, handleClickLike, () => {
     popupWithImage.open(cardInfo);
   });
   const cardElement = card.generateCard();
