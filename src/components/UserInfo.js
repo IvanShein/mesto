@@ -8,6 +8,7 @@ export default class UserInfo {
     this._avatar = '';
     this._id = '';
   };
+  // !!!переименовать публичные!!!
 
   getUserInfo() {
     this._formValues = {};
@@ -16,9 +17,10 @@ export default class UserInfo {
     return this._formValues;
   };
 
-  setUserInfo(newName, newJob) {
+  setUserInfo(newName, newJob, newId) {
     this._name = newName;
     this._job = newJob;
+    this._id = newId;
   };
 
   setUserAvatar(newAvatarLink) {

@@ -1,7 +1,8 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm.js'
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
@@ -76,7 +77,6 @@ function renderCardsFromServer() {
 // данные пользователя и данные карточек
 loadFromServerUserInformation()
 .then(() => {
-  console.log('функция превый раз', renderCardsFromServer);
   renderCardsFromServer()
 });
 
@@ -90,12 +90,31 @@ function enableValidity(validationConfig) {
     validator.enableValidation();
   });
 };
-
 enableValidity(enableValidationConfig);
 
 
+function submitDeleteConfirmationHandler(card, cardId) {
+  api.deleteCard(cardId)
+  .then(() => {
+    card._deleteCardElement();
+    popupWithConfirmation.close();
+  });
+};
+
+function handleClickDelete(card, cardId) {
+  popupWithConfirmation.open(card, cardId);
+};
+
+const popupWithConfirmation = new PopupWithConfirmation({
+  popupSelector: '.popup_type_delete-confirmation',
+  submitDeleteConfirmationHandler
+});
+popupWithConfirmation.setEventListeners();
+
+
+
 function createCard(cardInfo) {
-  const card = new Card(cardInfo, '#card', () => {
+  const card = new Card(cardInfo, userInfo._id, '#card', handleClickDelete, () => {
     popupWithImage.open(cardInfo);
   });
   const cardElement = card.generateCard();

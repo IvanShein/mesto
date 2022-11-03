@@ -87,12 +87,9 @@
   <div class="popup popup_type_edit-avatar">
     <div class="popup__container popup__container_type_avatar">
       <h2 class="popup__title">Обновить аватар</h2>
-      <!-- скорректировать класс- +avatar -->
         <form  name="editAvatar" action="#" class="popup__form popup__form_type_edit-avatar" novalidate>
-      <!-- скорректировать класс -->
         <input class="popup__input popup__input_type_avatar" id="avatar" name="avatar" type="url" placeholder="Ссылка на новое фото профиля" required>
         <span class="popup__error popup__error_visible avatar-error"></span>
-      <!-- скорректировать класс -->
         <button type="submit" class="popup__button popup__button_type_save-avatar">Сохранить</button>
       </form>
 
@@ -134,6 +131,20 @@
     </div>
   </div>
 
+ <!-- Pop-Up Avatar editor -->
+
+ <div class="popup popup_type_delete-confirmation">
+  <div class="popup__container popup__container_type_delete-confirmation">
+    <h2 class="popup__title">Вы уверены?</h2>
+      <form  name="delete-confirmation" action="#" class="popup__form popup__form_type_delete-confirmation" novalidate>
+        <button type="submit" class="popup__button popup__button_type_delete-confirmation">Да</button>
+    </form>
+
+    <button type="button" aria-label="Кнопка закрыть окно редактирования фото пользователя" class="popup__close-button popup__close-button_type_delete-confirmation"></button>
+  </div>
+</div>
+
+<!-- Card Element template -->
 
   <template id="card">
 

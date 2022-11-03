@@ -42,9 +42,11 @@
 @import url(../blocks/popup/_type/_foto/popup_type_foto.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__container/_type/_avatar/popup__container_type_avatar.css);
+@import url(../blocks/popup/__container/_type/_delete-confirmation/popup__container_type_delete-confirmation.css);
 @import url(../blocks/popup/__container-foto/popup__container-foto.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__form/_type/_delete-confirmation/popup__form_type_delete-confirmation.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__input/_type/_description/popup__input_type_description.css);
