@@ -24,7 +24,7 @@ const profileAvatarSelector = '.profile__avatar';
 const cardsContainerSelector = '.cards';
 
 // объект с настройками селекторов и классов для валидации, пердается при создании экземпляров класса FormValidator
-export const enableValidationConfig = {
+export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
@@ -48,7 +48,7 @@ const userInfo = new UserInfo({profileNameSelector , profileJobSelector, profile
 const cards = new Section({
   items: [],
   renderer: (data) => {
-    cards.addItem(createCard(data));
+    cards.appendItem(createCard(data));
     },
   },
   cardsContainerSelector
@@ -56,12 +56,12 @@ const cards = new Section({
 
 // загрузка с сервера данных пользователя
 function loadFromServerUserInformation() {
-return api.getUserInformation()
-.then(data => {
-  userInfo.setUserInfo(data.name, data.about, data._id);
-  userInfo.setUserAvatar(data.avatar);
-  return userInfo
-})
+  return api.getUserInformation()
+  .then(data => {
+    userInfo.setUserInfo(data.name, data.about, data._id);
+    userInfo.setUserAvatar(data.avatar);
+    return userInfo
+  })
   .then(userInfo => {
     userInfo.renderUserData()
   })
@@ -72,6 +72,9 @@ function renderCardsFromServer() {
   .then((data) => {
     renderInitialCards(data)
   })
+  .catch((error) => {
+    console.log(`К сожалению возникла ошибка: ${error}`);
+  })
 };
 
 // используется последовательность промисов, чтобы карточки
@@ -80,6 +83,9 @@ function renderCardsFromServer() {
 loadFromServerUserInformation()
 .then(() => {
   renderCardsFromServer()
+})
+.catch((error) => {
+  console.log(`К сожалению возникла ошибка: ${error}`);
 });
 
 const formValidator = {};
@@ -92,7 +98,7 @@ function enableValidity(validationConfig) {
     validator.enableValidation();
   });
 };
-enableValidity(enableValidationConfig);
+enableValidity(validationConfig);
 
 
 function submitDeleteConfirmationHandler(card, cardId) {
@@ -100,7 +106,10 @@ function submitDeleteConfirmationHandler(card, cardId) {
   .then(() => {
     card.deleteCardElement();
     popupWithConfirmation.close();
-  });
+  })
+  .catch((error) => {
+    console.log(`К сожалению возникла ошибка: ${error}`);
+  })
 };
 
 function handleClickDelete(card, cardId) {
@@ -119,11 +128,17 @@ function handleClickLike(card) {
     .then((cardInfo) => {
       card.setCardLikes(cardInfo.likes)
     })
+    .catch((error) => {
+      console.log(`К сожалению возникла ошибка: ${error}`);
+    })
   }
   else {
     api.sendCardLike(card.cardId)
     .then((cardInfo) => {
       card.setCardLikes(cardInfo.likes)
+    })
+    .catch((error) => {
+      console.log(`К сожалению возникла ошибка: ${error}`);
     })
   }
 };
@@ -137,43 +152,53 @@ function createCard(cardInfo) {
 };
 
 function renderInitialCards(initialCards) {
-cards.items = initialCards;
-cards.renderItems();
+  cards.items = initialCards;
+  cards.renderItems();
 };
 
 const popupWithImage = new PopupWithImage('.popup_type_foto')
 popupWithImage.setEventListeners();
 
 
-const popupAdd = new PopupWithForm({
+const popupAddNewCard = new PopupWithForm({
   popupSelector: '.popup_type_add',
   submitFormHandler: submitAddNewCard
 });
-popupAdd.setEventListeners();
+popupAddNewCard.setEventListeners();
 
 function submitAddNewCard(cardInfo) {
-popupAdd.changeSubmitButtonText('Сохранение...');
+popupAddNewCard.changeSubmitButtonText('Сохранение...');
 api.sendNewCard(cardInfo)
   .then((cardData) => {
     const cardElement = createCard(cardData);
-    cards.addItemToTop(cardElement);
+    cards.prependItem(cardElement);
+    popupAddNewCard.close();
   })
-    .finally(() => {popupAdd.changeSubmitButtonText('Создать')})
+  .catch((error) => {
+    console.log(`К сожалению возникла ошибка: ${error}`);
+  })
+  .finally(() => {popupAddNewCard.changeSubmitButtonText('Создать')})
 }
 
 addButtonElement.addEventListener('click', () => {
-  popupAdd.open();
-  const addButtonElement = popupAdd.getformPopup();
+  popupAddNewCard.open();
+  const addButtonElement = popupAddNewCard.getFormPopup();
   formValidator[addButtonElement.getAttribute('name')].validityReset();
 });
 
-function submitProfileAvatarFormHandler(){
+function submitProfileAvatarFormHandler() {
   popupEditAvatar.changeSubmitButtonText('Сохранение...');
   api.sendUserAvatarLink(avatarLinkInputElement.value)
     .then(() => {
       return Promise.resolve(loadFromServerUserInformation())
     })
-      .finally(() => {popupEditAvatar.changeSubmitButtonText('Сохранить')})
+    .then(() => {
+      popupEditAvatar.close();
+    })
+    .catch((error) => {
+      console.log(`К сожалению возникла ошибка: ${error}`);
+    })
+    .finally(() => {popupEditAvatar.changeSubmitButtonText('Сохранить')})
 };
 
 
@@ -186,29 +211,35 @@ popupEditAvatar.setEventListeners();
 
 profileAvatarEditElement.addEventListener('click', () => {
   popupEditAvatar.open();
-  const formEditAvatar = popupEditAvatar.getformPopup();
+  const formEditAvatar = popupEditAvatar.getFormPopup();
   formValidator[formEditAvatar.getAttribute('name')].validityReset();
 });
 
 editButtonElement.addEventListener('click', () => {
-  popupEdit.open();
-  const formEdit = popupEdit.getformPopup();
+  popupEditProfile.open();
+  const formEdit = popupEditProfile.getFormPopup();
   const user = userInfo.getUserInfo();
   nameInputElement.value = user.name;
   jobInputElement.value = user.job;
   formValidator[formEdit.getAttribute('name')].validityReset();
 });
 
-const popupEdit = new PopupWithForm({
+const popupEditProfile = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   submitFormHandler: submitProfileFormHandler
 });
-popupEdit.setEventListeners();
+popupEditProfile.setEventListeners();
 
 function submitProfileFormHandler(){
-  popupEdit.changeSubmitButtonText('Сохранение...');
+  popupEditProfile.changeSubmitButtonText('Сохранение...');
   api.sendUserInformation(nameInputElement.value, jobInputElement.value)
     .then(() => {return Promise.resolve(loadFromServerUserInformation())
     })
-      .finally(() => {popupEdit.changeSubmitButtonText('Сохранить')})
+    .then(() => {
+      popupEditProfile.close();
+    })
+    .catch((error) => {
+      console.log(`К сожалению возникла ошибка: ${error}`);
+    })
+    .finally(() => {popupEditProfile.changeSubmitButtonText('Сохранить')})
 };

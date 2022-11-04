@@ -17,13 +17,17 @@ export default class UserInfo {
   };
 
   setUserInfo(newName, newJob, newId) {
-    this._name = newName;
-    this._job = newJob;
-    this.id = newId;
+    if (newName && newJob && newId) {
+      this._name = newName;
+      this._job = newJob;
+      this.id = newId;
+    }
   };
 
   setUserAvatar(newAvatarLink) {
-    this._avatar = newAvatarLink;
+    if (newAvatarLink) {
+      this._avatar = newAvatarLink;
+    }
   };
 
   renderUserData() {

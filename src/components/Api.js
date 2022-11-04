@@ -9,9 +9,6 @@ export default class Api {
       return response.json();
     }
     return Promise.reject(`При обращении к серверу возникла ошибка: ${response.status} ${response.statusText}`)
-   .catch((error) => {
-    console.log(error);
-  });
   };
 
   getUserInformation() {

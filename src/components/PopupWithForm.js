@@ -9,7 +9,7 @@ export default class PopupWithForm extends Popup {
     this._submitFormHandler = submitFormHandler;
   };
 
-  getformPopup() {
+  getFormPopup() {
     return this._formPopupElement;
   };
 
@@ -26,7 +26,6 @@ export default class PopupWithForm extends Popup {
       evt.preventDefault();
 
       this._submitFormHandler(this._getInputValues());
-      this.close();
     });
   };
 
