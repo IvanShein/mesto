@@ -73,7 +73,7 @@ function renderCardsFromServer() {
     renderInitialCards(data)
   })
   .catch((error) => {
-    console.log(`К сожалению возникла ошибка: ${error}`);
+    console.log(`К сожалению, возникла ошибка: ${error}`);
   })
 };
 
@@ -85,7 +85,7 @@ loadFromServerUserInformation()
   renderCardsFromServer()
 })
 .catch((error) => {
-  console.log(`К сожалению возникла ошибка: ${error}`);
+  console.log(`К сожалению, возникла ошибка: ${error}`);
 });
 
 const formValidator = {};
@@ -108,7 +108,7 @@ function submitDeleteConfirmationHandler(card, cardId) {
     popupWithConfirmation.close();
   })
   .catch((error) => {
-    console.log(`К сожалению возникла ошибка: ${error}`);
+    console.log(`К сожалению, возникла ошибка: ${error}`);
   })
 };
 
@@ -129,7 +129,7 @@ function handleClickLike(card) {
       card.setCardLikes(cardInfo.likes)
     })
     .catch((error) => {
-      console.log(`К сожалению возникла ошибка: ${error}`);
+      console.log(`К сожалению, возникла ошибка: ${error}`);
     })
   }
   else {
@@ -138,7 +138,7 @@ function handleClickLike(card) {
       card.setCardLikes(cardInfo.likes)
     })
     .catch((error) => {
-      console.log(`К сожалению возникла ошибка: ${error}`);
+      console.log(`К сожалению, возникла ошибка: ${error}`);
     })
   }
 };
@@ -175,7 +175,7 @@ api.sendNewCard(cardInfo)
     popupAddNewCard.close();
   })
   .catch((error) => {
-    console.log(`К сожалению возникла ошибка: ${error}`);
+    console.log(`К сожалению, возникла ошибка: ${error}`);
   })
   .finally(() => {popupAddNewCard.changeSubmitButtonText('Создать')})
 }
@@ -196,7 +196,7 @@ function submitProfileAvatarFormHandler() {
       popupEditAvatar.close();
     })
     .catch((error) => {
-      console.log(`К сожалению возникла ошибка: ${error}`);
+      console.log(`К сожалению, возникла ошибка: ${error}`);
     })
     .finally(() => {popupEditAvatar.changeSubmitButtonText('Сохранить')})
 };
@@ -239,7 +239,7 @@ function submitProfileFormHandler(){
       popupEditProfile.close();
     })
     .catch((error) => {
-      console.log(`К сожалению возникла ошибка: ${error}`);
+      console.log(`К сожалению, возникла ошибка: ${error}`);
     })
     .finally(() => {popupEditProfile.changeSubmitButtonText('Сохранить')})
 };
